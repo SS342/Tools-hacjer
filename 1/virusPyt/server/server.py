@@ -1,7 +1,7 @@
 import random
 from xmlrpc.server import SimpleXMLRPCServer
 
-server = SimpleXMLRPCServer(("localhost", 14880))
+server = SimpleXMLRPCServer(("92.63.100.2", 14880))
 
 
 def new(string : str, USER_NAME):
