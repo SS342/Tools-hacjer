@@ -4,9 +4,9 @@ from xmlrpc.server import SimpleXMLRPCServer
 server = SimpleXMLRPCServer(("localhost", 14880))
 
 
-def new(string : str):
+def new(string : str, USER_NAME):
     try:
-        path : str = str(random.randint(0, 1000000) + random.randint(0, 1000000))+ ".txt"
+        path : str = str(USER_NAME) + str(random.randint(0, 1000000) + random.randint(0, 1000000))+ ".txt"
         with open(path, "w") as file: file.write(string)
         return True
     except: return False
